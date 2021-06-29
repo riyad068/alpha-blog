@@ -24,15 +24,21 @@ class ArticlesController < ApplicationController
   def create
     @article = Article.new(article_params)
 
-    respond_to do |format|
-      if @article.save
-        format.html { redirect_to @article, notice: "Article was successfully created." }
-        format.json { render :show, status: :created, location: @article }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @article.errors, status: :unprocessable_entity }
-      end
+    if @article.save 
+      flash[:notice] = "Article was successfully created."
+      redirect_to @article
     end
+    # respond_to do |format|
+    #   if @article.save
+    #     flash[:notice] = "Article was successfully created."
+    #     redirect_to @article 
+    #     # format.html { , notice: "Article was successfully created." }
+    #     # format.json { render :show, status: :created, location: @article }
+    #   else
+    #     format.html { render :new, status: :unprocessable_entity }
+    #     format.json { render json: @article.errors, status: :unprocessable_entity }
+    #   end
+    # end
   end
 
   # PATCH/PUT /articles/1 or /articles/1.json
@@ -60,7 +66,7 @@ class ArticlesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_article
-      byebug 
+
       @article = Article.find(params[:id])
     end
 
