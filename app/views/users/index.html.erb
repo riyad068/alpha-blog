@@ -1,0 +1,33 @@
+<h1 class="text-center mt-4">Alpha Blogger</h1>
+<div class="flickr_pagination">
+    <%= will_paginate @users, :container => false %>
+</div>
+
+<% if !@users.empty? %>
+  <table>
+    <thead>
+      <tr>
+        <th>Image</th>
+        <th>Username</th>
+        <th>No. of Articles</th>
+        <th colspan="2"></th>
+        <th>Joined</th>
+      </tr>
+    </thead>
+    <tbody>
+        <% @users.each do |user| %>
+            <tr>
+                <td><%= link_to gravatar_for(user) ,user %></td>
+                <td><%= link_to user.username , user %></td>
+                <td><%= pluralize(user.articles.count, "article") %></td>
+                <td><%= link_to 'View profile', user %></td>
+                <td><%= link_to 'Edit profile', edit_user_path(user) %></td>
+                <td><%= time_ago_in_words(user.created_at)%>
+            </tr>
+      <% end %>
+    </tbody> 
+  </table>
+<% end %>
+<div class="flickr_pagination mb-4">
+    <%= will_paginate @users, :container => false %>
+</div>

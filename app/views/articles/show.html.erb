@@ -12,7 +12,8 @@
 
 <p>
   <strong>By:</strong>
-  <%= @article.user.username %>
+  <%= @article.user.username if @article.user %>
+  <%= link_to gravatar_for(@article.user) , user_path(@article.user) %>
 </p>
 
 <%= link_to 'Edit', edit_article_path(@article) %> |

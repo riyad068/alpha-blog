@@ -1,8 +1,13 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Listing all Articles</h1>
-
+<div class="flickr_pagination">
+    <%= will_paginate @articles, :container => false %>
+</div>
 <%= render 'article' %>
+<div class="flickr_pagination">
+    <%= will_paginate @articles, :container => false %>
+</div>
 <br>
 
 <%= link_to 'New Article', new_article_path %>
